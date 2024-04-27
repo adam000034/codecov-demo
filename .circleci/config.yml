@@ -17,8 +17,3 @@ jobs:
           command: python3 -m pytest --cov api.calculator
       - codecov/upload
 
-workflows:
-  version: 2.1
-  build-test:
-    jobs:
-      - test-api
