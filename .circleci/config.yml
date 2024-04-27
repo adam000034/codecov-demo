@@ -14,6 +14,11 @@ jobs:
           command: pip install -r api/requirements.txt
       - run:
           name: Run tests and collect coverage
-          command: python3 -m pytest --cov api.calculator
+          command: pytest --cov api.calculator
       - codecov/upload
 
+workflows:
+  version: 2.1
+  build-test:
+    jobs:
+      - test-api
