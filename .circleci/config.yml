@@ -1,28 +1,24 @@
+version: 2.1
+
+orbs:
+  codecov: codecov/codecov@4.0.1
+
 jobs:
-  ...
-  test-frontend:
+  test-api:
     docker:
-      - image: cimg/node:17.6.0
+      - image: cimg/python:3.10.2
     steps:
       - checkout
       - run:
           name: Install requirements
-          command: cd web && npm install
+          command: pip install -r api/requirements.txt
       - run:
           name: Run tests and collect coverage
-          command: cd web && npm run test
+          command: pytest --cov api.calculator
       - codecov/upload
 
 workflows:
-  ...
+  version: 2.1
   build-test:
     jobs:
-      test-api:
-      ...
-      - codecov/upload:
-          flags: backend
-    test-frontend:
-      ...
-      - codecov/upload:
-          flags: frontend
-
+      - test-api
